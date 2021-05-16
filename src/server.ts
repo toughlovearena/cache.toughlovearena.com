@@ -17,6 +17,9 @@ export class Server {
     app.use(cors());
     app.use(express.json());
 
+    app.get('/', (req, res) => {
+      res.redirect('/health');
+    });
     app.get('/health', (req, res) => {
       const versionStr = fs.readFileSync('version.json').toString();
       const version = JSON.parse(versionStr) as Version;
