@@ -48,5 +48,7 @@ nvm install 10.6
 git clone https://github.com/toughlovearena/cache.toughlovearena.com.git
 cd cache.toughlovearena.com
 npm i
+npm run build
+npm run bg
 
 ```
