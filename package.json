@@ -2,6 +2,8 @@
   "name": "fighter-cache",
   "version": "1.0.0",
   "description": "",
+  "author": "toughlovearena@gmail.com",
+  "license": "MIT",
   "engines": {
     "node": ">=10.0.0"
   },
@@ -16,18 +18,17 @@
     "watch": "nodemon",
     "bg": "forever start dist/index.js",
     "kill": "forever stop dist/index.js",
-    "update": "git pull && npm i",
+    "update": "git checkout prod && git pull && npm i",
     "rebuild": "npm-run-all update build kill bg",
+    "setup": "npm-run-all update build bg",
     "test": "jest --detectOpenHandles",
     "ci-test": "jest --detectOpenHandles --runInBand"
   },
-  "author": "toughlovearena@gmail.com",
-  "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "fs": "0.0.1-security",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "simple-git": "^2.39.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.9",

@@ -1,9 +1,9 @@
-name: Unit Tests
+name: Deploy
 
 on:
   push:
-    branches-ignore:
-      - 'prod'
+    branches:
+      - 'main'
 
 jobs:
   build:
@@ -41,3 +41,6 @@ jobs:
 
     - name: Test
       run: npm run ci-test
+
+    - name: Deploy
+      run: git push -f origin HEAD:prod

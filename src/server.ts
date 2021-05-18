@@ -1,30 +1,23 @@
 import cors from 'cors';
 import express from 'express';
-import fs from 'fs';
 import { CacheManager } from './cacheManager';
-
-interface Version {
-  v: number;
-  u: number;
-}
 
 export class Server {
   private app = express();
 
-  constructor() {
+  constructor(gitHash: string) {
+    const started = new Date();
     const cache = new CacheManager();
-    const { app } = this;
-    app.use(cors());
-    app.use(express.json());
+    this.app.use(cors());
+    this.app.use(express.json());
 
-    app.get('/', (req, res) => {
+    this.app.get('/', (req, res) => {
       res.redirect('/health');
     });
-    app.get('/health', (req, res) => {
-      const versionStr = fs.readFileSync('version.json').toString();
-      const version = JSON.parse(versionStr) as Version;
+    this.app.get('/health', (req, res) => {
       const data = {
-        version: version.v,
+        gitHash,
+        started,
         cache: cache.summary(),
       };
       res.send(data);
@@ -32,7 +25,7 @@ export class Server {
 
     // api
     const apiBaseUrl = 'https://us-central1-fighter-api.cloudfunctions.net/webApi/api/v1';
-    app.get(/^\/api\/(.+)/, async (req, res) => {
+    this.app.get(/^\/api\/(.+)/, async (req, res) => {
       const path = req.params[0];
       const url = `${apiBaseUrl}/${path}`;
       try {
