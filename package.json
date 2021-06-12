@@ -16,15 +16,13 @@
     "prestart": "npm-run-all lint build",
     "start": "node dist/index.js",
     "watch": "nodemon",
-    "bg": "forever start dist/index.js",
+    "bg": "npx @toughlovearena/updater",
     "kill": "forever stop dist/index.js",
-    "update": "git checkout prod && git pull && npm i",
-    "rebuild": "npm-run-all update build kill bg",
-    "setup": "npm-run-all update build bg",
     "test": "jest --detectOpenHandles",
     "ci-test": "jest --detectOpenHandles --runInBand"
   },
   "dependencies": {
+    "@toughlovearena/updater": "^2.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
