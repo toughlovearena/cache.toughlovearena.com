@@ -18,6 +18,7 @@ export class Server {
       const data = {
         gitHash,
         started,
+        testId: 0,
         cache: cache.summary(),
       };
       res.send(data);
