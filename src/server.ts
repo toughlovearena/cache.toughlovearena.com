@@ -1,3 +1,4 @@
+import { Updater } from '@toughlovearena/updater';
 import cors from 'cors';
 import express from 'express';
 import { CacheManager } from './cacheManager';
@@ -5,8 +6,7 @@ import { CacheManager } from './cacheManager';
 export class Server {
   private app = express();
 
-  constructor(gitHash: string) {
-    const started = new Date();
+  constructor(updater: Updater) {
     const cache = new CacheManager();
     this.app.use(cors());
     this.app.use(express.json());
@@ -14,10 +14,11 @@ export class Server {
     this.app.get('/', (req, res) => {
       res.redirect('/health');
     });
-    this.app.get('/health', (req, res) => {
+    this.app.get('/health', async (req, res) => {
+      const gitHash = await updater.gitter.hash();
       const data = {
         gitHash,
-        started,
+        started: new Date(updater.startedAt),
         testId: 0,
         cache: cache.summary(),
       };
