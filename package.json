@@ -5,7 +5,7 @@
   "author": "toughlovearena@gmail.com",
   "license": "MIT",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=14.17.1"
   },
   "scripts": {
     "ps": "netstat -lnp | grep 2600",
@@ -22,7 +22,7 @@
     "ci-test": "jest --detectOpenHandles --runInBand"
   },
   "dependencies": {
-    "@toughlovearena/updater": "^2.1.1",
+    "@toughlovearena/updater": "^2.1.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1"
