@@ -37,7 +37,7 @@ sudo certbot renew --dry-run
 
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 source .profile
-nvm install 10.6
+nvm install $(cat .nvmrc)
 
 ```
 
@@ -47,6 +47,7 @@ nvm install 10.6
 
 git clone https://github.com/toughlovearena/cache.toughlovearena.com.git
 cd cache.toughlovearena.com
-npm run setup
+npm i
+npm run bg
 
 ```
